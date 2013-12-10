@@ -25,6 +25,8 @@
     <!-- JavaScript plugins (requires jQuery) -->
     <script src="//code.jquery.com/jquery.min.js"></script>
 
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="YueRuo's Blog ATOM Feed"/>
 
 </head>
 <body>
@@ -41,8 +43,9 @@
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
+                        <li><a href="/pages/resume.html">简介</a></li>
                         <li >
-                            <a href="/category/test.html">Test</a>
+                            <a href="/category/qi-ta.html">其他</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -59,7 +62,7 @@
     <section id="categories">
         <h1>Categories for YueRuo's Blog</h1>
         <ul>
-                <li><a href="category/test.html">Test</a></li>
+                <li><a href="category/qi-ta.html">其他</a></li>
         </ul>
     </section>
         </div>
@@ -82,5 +85,18 @@
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="/theme/js/respond.min.js"></script>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'yueruosblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
 </body>
 </html>
