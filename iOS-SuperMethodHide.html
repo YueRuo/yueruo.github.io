@@ -3,7 +3,7 @@
       xmlns:og="http://ogp.me/ns#"
       xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
-    <title>搭建Blog完成</title>
+    <title>iOS中屏蔽父类方法</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -12,9 +12,9 @@
     <!-- Open Graph tags -->
 
             <meta property="og:type" content="article"/>
-            <meta property="og:title" content="搭建Blog完成"/>
-            <meta property="og:url" content="http://yueruo.github.io/firstblog.html"/>
-            <meta property="og:description" content="利用Pelican在GithubPages搭建Blog完成"/>
+            <meta property="og:title" content="iOS中屏蔽父类方法"/>
+            <meta property="og:url" content="http://yueruo.github.io/iOS-SuperMethodHide.html"/>
+            <meta property="og:description" content="iOS中屏蔽父类方法"/>
 
     <!-- Bootstrap -->
         <link rel="stylesheet" href="http://yueruo.github.io/theme/css/bootstrap.min.css" type="text/css"/>
@@ -60,10 +60,10 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                         <li><a href="http://yueruo.github.io/pages/resume.html">简介</a></li>
-                        <li >
+                        <li class="active">
                             <a href="http://yueruo.github.io/category/ioskai-fa.html">iOS开发</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="http://yueruo.github.io/category/qi-ta.html">其他</a>
                         </li>
             </ul>
@@ -82,10 +82,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="http://yueruo.github.io/firstblog.html"
+                    <a href="http://yueruo.github.io/iOS-SuperMethodHide.html"
                        rel="bookmark"
-                       title="Permalink to 搭建Blog完成">
-                        搭建Blog完成
+                       title="Permalink to iOS中屏蔽父类方法">
+                        iOS中屏蔽父类方法
                     </a>
                 </h1>
             </header>
@@ -95,18 +95,66 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>一 02 十二月 2013
+        <i class="icon-calendar"></i>日 22 十二月 2013
     </span>
 
 
 
+<span class="label label-default">Tags</span>
+	<a href="http://yueruo.github.io/tag/ios.html">iOS</a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <h4>搭建Blog完成</h4>
-<hr />
-<p>&nbsp;&nbsp;&nbsp;&nbsp;终于把这个弄好了，不容易啊，以前一直在CSDN上写Blog，但是很难用，后来决定迁移到Github上来，使用Markdown语法来写，于是开始了我的折腾。<br />
-&nbsp;&nbsp;&nbsp;&nbsp;先是<a href="https://github.com/getpelican/pelican">Pelican</a>的安装，然后是Markdown语法的简单学习，接着安装<a href="https://github.com/waylan/Python-Markdown">Python-Markdown</a>。最后Github Pages,虽然现在可能还有些东西没完成，但是对于我来说，Blog的基本功能是足够了。  <br />
-&nbsp;&nbsp;&nbsp;&nbsp;期间遇到了一个Disqus评论不能正常加载的问题，最后通过检查，发现时因为配置文件中的<code>SITEURL</code>没有设置造成的，添加上后就可以了。</p>
+                <h4>iOS中屏蔽父类方法</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;iOS开发中，有时你可能希望屏蔽一些父类的方法，比如说对于单例类，你不希望别人再通过  </p>
+<div class="highlight"><pre><span class="p">[[</span><span class="kt">Class</span> <span class="n">alloc</span><span class="p">]</span><span class="n">init</span><span class="p">]</span>
+</pre></div>
+
+
+<p>的方式再次创建一个对象。类似JAVA语言中，可以通过覆盖父类的方法，改为private即可使外部无法访问到此方法，那么iOS中如何操作呢？<br />
+&nbsp;&nbsp;&nbsp;&nbsp;首先对于Objective-C来说，父类的方法永远是对外可见的。换句话说，不可能达到类似JAVA那种的完全的屏蔽一个方法。但是，我们可以通过如下办法来变相达到：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于任意的对象，其自身都有一个doesNotRecognizeSelector方法，用于从类中移除一个方法(本质是让该类不响应此消息)。
+所以，我们可以在类似init这种地方，使用：   </p>
+<div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">self</span> <span class="n">doesNotRecognizeSelector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">init</span><span class="p">)];</span>
+    <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;从而在运行时调用此方法时，由于没有此方法而报错。<br />
+&nbsp;&nbsp;&nbsp;&nbsp;你也可以使用断言，或自己的打印来给予其他开发者更多的提示，比如下面这样：</p>
+<div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span> <span class="p">{</span>
+    <span class="n">NSAssert</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="s">@&quot;this method not available !&quot;</span><span class="p">)];</span>
+    <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;最后，给出一个完整的<code>单例</code>的小demo，并且禁用外部调用init方法来对类进行实例化，假设类名位YRDemoClass。  </p>
+<div class="highlight"><pre><span class="k">@implementation</span> <span class="nc">YRDemoClass</span>
+<span class="k">static</span> <span class="n">YRDemoClass</span> <span class="o">*</span><span class="n">instance</span><span class="o">=</span><span class="nb">nil</span><span class="p">;</span>
+<span class="k">+</span><span class="p">(</span><span class="n">YRDemoClass</span> <span class="o">*</span><span class="p">)</span><span class="nf">shareDemoClass</span><span class="p">{</span>
+    <span class="k">static</span> <span class="kt">dispatch_once_t</span> <span class="n">onceToken</span><span class="p">;</span>
+    <span class="n">dispatch_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">onceToken</span><span class="p">,</span> <span class="o">^</span><span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">instance</span><span class="p">)</span> <span class="p">{</span>
+         <span class="n">instance</span><span class="o">=</span><span class="p">[[</span><span class="n">YRDemoClass</span> <span class="n">alloc</span><span class="p">]</span><span class="n">initBySuper</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span> <span class="p">{</span><span class="c1">//禁用外部可见的init方法</span>
+    <span class="n">NSAssert</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="s">@&quot;this class is Singleton !&quot;</span><span class="p">)];</span>
+    <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+<span class="p">}</span>  
+<span class="k">-</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initBySuper</span><span class="p">{</span><span class="c1">//外部不可见的方法</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="o">=</span><span class="p">[</span><span class="n">super</span> <span class="n">init</span><span class="p">])</span> <span class="p">{</span>
+    <span class="c1">//your custom init</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//其他的方法等等</span>
+<span class="k">@end</span>
+</pre></div>
             </div>
             <!-- /.entry-content -->
     <hr />
@@ -116,8 +164,8 @@
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'yueruosblog'; // required: replace example with your forum shortname
-            var disqus_identifier = 'firstblog';
-            var disqus_url = 'http://yueruo.github.io/firstblog.html';
+            var disqus_identifier = 'iOS-SuperMethodHide';
+            var disqus_url = 'http://yueruo.github.io/iOS-SuperMethodHide.html';
 
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function () {

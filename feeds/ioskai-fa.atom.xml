@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>YueRuo's Blog</title><link href="http://yueruo.github.io/" rel="alternate"></link><link href="http://yueruo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://yueruo.github.io/</id><updated>2013-12-22T13:20:00+01:00</updated><entry><title>iOS中屏蔽父类方法</title><link href="http://yueruo.github.io/iOS-SuperMethodHide.html" rel="alternate"></link><updated>2013-12-22T13:20:00+01:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2013-12-22:iOS-SuperMethodHide.html</id><summary type="html">&lt;h4&gt;iOS中屏蔽父类方法&lt;/h4&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>YueRuo's Blog</title><link href="http://yueruo.github.io/" rel="alternate"></link><link href="http://yueruo.github.io/feeds/ioskai-fa.atom.xml" rel="self"></link><id>http://yueruo.github.io/</id><updated>2013-12-22T13:20:00+01:00</updated><entry><title>iOS中屏蔽父类方法</title><link href="http://yueruo.github.io/iOS-SuperMethodHide.html" rel="alternate"></link><updated>2013-12-22T13:20:00+01:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2013-12-22:iOS-SuperMethodHide.html</id><summary type="html">&lt;h4&gt;iOS中屏蔽父类方法&lt;/h4&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;iOS开发中，有时你可能希望屏蔽一些父类的方法，比如说对于单例类，你不希望别人再通过  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="kt"&gt;Class&lt;/span&gt; &lt;span class="n"&gt;alloc&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -49,8 +49,4 @@
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="c1"&gt;//其他的方法等等&lt;/span&gt;
 &lt;span class="k"&gt;@end&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="iOS"></category></entry><entry><title>搭建Blog完成</title><link href="http://yueruo.github.io/firstblog.html" rel="alternate"></link><updated>2013-12-05T20:20:00+01:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2013-12-02:firstblog.html</id><summary type="html">&lt;h4&gt;搭建Blog完成&lt;/h4&gt;
-&lt;hr /&gt;
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;终于把这个弄好了，不容易啊，以前一直在CSDN上写Blog，但是很难用，后来决定迁移到Github上来，使用Markdown语法来写，于是开始了我的折腾。&lt;br /&gt;
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;先是&lt;a href="https://github.com/getpelican/pelican"&gt;Pelican&lt;/a&gt;的安装，然后是Markdown语法的简单学习，接着安装&lt;a href="https://github.com/waylan/Python-Markdown"&gt;Python-Markdown&lt;/a&gt;。最后Github Pages,虽然现在可能还有些东西没完成，但是对于我来说，Blog的基本功能是足够了。  &lt;br /&gt;
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;期间遇到了一个Disqus评论不能正常加载的问题，最后通过检查，发现时因为配置文件中的&lt;code&gt;SITEURL&lt;/code&gt;没有设置造成的，添加上后就可以了。&lt;/p&gt;</summary></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="iOS"></category></entry></feed>
