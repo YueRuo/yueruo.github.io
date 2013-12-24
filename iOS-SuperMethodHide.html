@@ -112,7 +112,7 @@
 
 <p>的方式再次创建一个对象。类似JAVA语言中，可以通过覆盖父类的方法，改为private即可使外部无法访问到此方法，那么iOS中如何操作呢？<br />
 &nbsp;&nbsp;&nbsp;&nbsp;首先对于Objective-C来说，父类的方法永远是对外可见的。换句话说，不可能达到类似JAVA那种的完全的屏蔽一个方法。但是，我们可以通过如下办法来变相达到：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;对于任意的对象，其自身都有一个doesNotRecognizeSelector方法，用于从类中移除一个方法(本质是让该类不响应此消息)。
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于任意的对象，其自身都有一个doesNotRecognizeSelector方法，当调用时会抛出异常(可以变相的让类不响应此消息)。
 所以，我们可以在类似init这种地方，使用：   </p>
 <div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span> <span class="p">{</span>
     <span class="p">[</span><span class="n">self</span> <span class="n">doesNotRecognizeSelector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">init</span><span class="p">)];</span>
@@ -137,7 +137,7 @@
     <span class="k">static</span> <span class="kt">dispatch_once_t</span> <span class="n">onceToken</span><span class="p">;</span>
     <span class="n">dispatch_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">onceToken</span><span class="p">,</span> <span class="o">^</span><span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">instance</span><span class="p">)</span> <span class="p">{</span>
-         <span class="n">instance</span><span class="o">=</span><span class="p">[[</span><span class="n">YRDemoClass</span> <span class="n">alloc</span><span class="p">]</span><span class="n">initBySuper</span><span class="p">];</span>
+            <span class="n">instance</span><span class="o">=</span><span class="p">[[</span><span class="n">YRDemoClass</span> <span class="n">alloc</span><span class="p">]</span><span class="n">initBySuper</span><span class="p">];</span>
         <span class="p">}</span>
     <span class="p">});</span>
     <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
