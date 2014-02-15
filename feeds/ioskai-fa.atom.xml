@@ -16,7 +16,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;从而在运行时调用此方法时，由于没有此方法而报错。&lt;br /&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;从而在运行时调用此方法时，由于不响应此消息而报错。&lt;br /&gt;
 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;你也可以使用断言，或自己的打印来给予其他开发者更多的提示，比如下面这样：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nf"&gt;init&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="n"&gt;NSAssert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;@&amp;quot;this method not available !&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)];&lt;/span&gt;
