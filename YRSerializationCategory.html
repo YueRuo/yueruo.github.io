@@ -105,8 +105,9 @@
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <h4>iOS的通用的类序列化</h4>
-<p>对于任何一门语言来说，序列化和反序列化操作都是很重要的部分。在iOS开发当中，经常可能会遇到把某个类处理成可存储的数据，以便之后使用（或者再恢复成之前的对象）。</p>
-<p>这里我直接进入正题，给出三种解决方案：    </p>
+<p>对于任何一门语言来说，序列化和反序列化操作都是很重要的部分。在iOS开发当中，经常可能会遇到把某个类处理成可存储的数据，以便之后使用（或者再恢复成之前的对象）。<br />
+<br>---若转载请注明出处- YueRuo's Blog - <a href="http://yueruo.github.io">http://yueruo.github.io</a> ---<br> <br />
+这里我直接进入正题，给出三种解决方案：    </p>
 <h6>第一种：使用iOS框架中的NSKeyedArchiver</h6>
 <p>使用这个的教程网上太多了，概括起来就是对需要序列化和反序列化的类实现NSCoding协议的两个方法</p>
 <div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">encodeWithCoder</span><span class="o">:</span><span class="p">(</span><span class="n">NSCoder</span> <span class="o">*</span><span class="p">)</span><span class="n">aCoder</span><span class="p">;</span>  

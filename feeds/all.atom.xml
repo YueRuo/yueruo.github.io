@@ -25,6 +25,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;p&gt;&lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;最后，给出一个完整的&lt;code&gt;单例&lt;/code&gt;的小demo，并且禁用外部调用init方法来对类进行实例化，假设类名位YRDemoClass。  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;@implementation&lt;/span&gt; &lt;span class="nc"&gt;YRDemoClass&lt;/span&gt;
 &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;YRDemoClass&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -50,8 +51,9 @@
 &lt;span class="c1"&gt;//其他的方法等等&lt;/span&gt;
 &lt;span class="k"&gt;@end&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="iOS"></category></entry><entry><title>iOS的通用的类序列化</title><link href="http://yueruo.github.io/YRSerializationCategory.html" rel="alternate"></link><updated>2013-12-10T11:20:00+01:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2013-12-10:YRSerializationCategory.html</id><summary type="html">&lt;h4&gt;iOS的通用的类序列化&lt;/h4&gt;
-&lt;p&gt;对于任何一门语言来说，序列化和反序列化操作都是很重要的部分。在iOS开发当中，经常可能会遇到把某个类处理成可存储的数据，以便之后使用（或者再恢复成之前的对象）。&lt;/p&gt;
-&lt;p&gt;这里我直接进入正题，给出三种解决方案：    &lt;/p&gt;
+&lt;p&gt;对于任何一门语言来说，序列化和反序列化操作都是很重要的部分。在iOS开发当中，经常可能会遇到把某个类处理成可存储的数据，以便之后使用（或者再恢复成之前的对象）。&lt;br /&gt;
+&lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt; &lt;br /&gt;
+这里我直接进入正题，给出三种解决方案：    &lt;/p&gt;
 &lt;h6&gt;第一种：使用iOS框架中的NSKeyedArchiver&lt;/h6&gt;
 &lt;p&gt;使用这个的教程网上太多了，概括起来就是对需要序列化和反序列化的类实现NSCoding协议的两个方法&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;encodeWithCoder&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NSCoder&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;aCoder&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  
