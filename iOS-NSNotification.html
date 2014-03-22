@@ -3,7 +3,7 @@
       xmlns:og="http://ogp.me/ns#"
       xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
-    <title>iOS的通用的类序列化</title>
+    <title>支付宝电话面试</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -12,9 +12,9 @@
     <!-- Open Graph tags -->
 
             <meta property="og:type" content="article"/>
-            <meta property="og:title" content="iOS的通用的类序列化"/>
-            <meta property="og:url" content="http://yueruo.github.io/YRSerializationCategory.html"/>
-            <meta property="og:description" content="iOS的通用的类序列化"/>
+            <meta property="og:title" content="支付宝电话面试"/>
+            <meta property="og:url" content="http://yueruo.github.io/iOS-NSNotification.html"/>
+            <meta property="og:description" content="支付宝电话面试总结"/>
 
     <!-- Bootstrap -->
         <link rel="stylesheet" href="http://yueruo.github.io/theme/css/bootstrap.min.css" type="text/css"/>
@@ -60,10 +60,10 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                         <li><a href="http://yueruo.github.io/pages/resume.html">简介</a></li>
-                        <li class="active">
+                        <li >
                             <a href="http://yueruo.github.io/category/ioskai-fa.html">iOS开发</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="http://yueruo.github.io/category/mian-shi.html">面试</a>
                         </li>
                         <li >
@@ -85,10 +85,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="http://yueruo.github.io/YRSerializationCategory.html"
+                    <a href="http://yueruo.github.io/iOS-NSNotification.html"
                        rel="bookmark"
-                       title="Permalink to iOS的通用的类序列化">
-                        iOS的通用的类序列化
+                       title="Permalink to 支付宝电话面试">
+                        支付宝电话面试
                     </a>
                 </h1>
             </header>
@@ -98,51 +98,32 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>二 10 十二月 2013
+        <i class="icon-calendar"></i>五 28 二月 2014
     </span>
 
 
 
 <span class="label label-default">Tags</span>
-	<a href="http://yueruo.github.io/tag/ios.html">iOS</a>
+	<a href="http://yueruo.github.io/tag/iosmian-shi.html">iOS面试</a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <h4>iOS的通用的类序列化</h4>
-<p>对于任何一门语言来说，序列化和反序列化操作都是很重要的部分。在iOS开发当中，经常可能会遇到把某个类处理成可存储的数据，以便之后使用（或者再恢复成之前的对象）。<br />
-<br>---若转载请注明出处- YueRuo's Blog - <a href="http://yueruo.github.io">http://yueruo.github.io</a> ---<br> <br />
-这里我直接进入正题，给出三种解决方案：    </p>
-<h6>第一种：使用iOS框架中的NSKeyedArchiver</h6>
-<p>使用这个的教程网上太多了，概括起来就是对需要序列化和反序列化的类实现NSCoding协议的两个方法</p>
-<div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">encodeWithCoder</span><span class="o">:</span><span class="p">(</span><span class="n">NSCoder</span> <span class="o">*</span><span class="p">)</span><span class="n">aCoder</span><span class="p">;</span>  
-<span class="o">-</span> <span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="n">initWithCoder</span><span class="o">:</span><span class="p">(</span><span class="n">NSCoder</span> <span class="o">*</span><span class="p">)</span><span class="n">aDecoder</span><span class="p">;</span>
-</pre></div>
-
-
-<p>之后通过NSKeyedArchiver进行相应的操作即可。优势是比较简单易处理，能满足保存一个对象并恢复的需求，可以指定保存的类型为xml等等。</p>
-<h6>第二种：对需要自定义序列化的类进行特殊处理</h6>
-<p>比如我希望A类能序列化成JSON数据，然后再通过JSONString反序列化回来，这时候上面的那种方式已经满足不了需求了，可以相应的在A类里面添加如</p>
-<div class="highlight"><pre><span class="o">-</span><span class="p">(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">toJSONString</span><span class="p">;</span>  
-<span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">fromJSONString</span><span class="p">;</span>
-</pre></div>
-
-
-<p>然后自己去针对性的实现，这种方式总体上是比上面那种要更加灵活，输出格式也可以自己任意定制，简而言之就是根据自己的类针对性的写相应的序列化和反序列化方法。  <br />
-<br><br>
-上面这两种方式都能实现序列化和反序列化，优势是对不同的类很有针对性，缺点也比较明显，每次你需要对一个新的类做序列化和反序列化时，都要自己去手动实现相应的方法才能使用。如果有100个类需要序列化，难道我们要100个类都挨个写一遍么？<br />
-<br></p>
-<h6>第三种：使用通用的序列化和反序列化方法。</h6>
-<p>所谓通用方法，即一套可以对任意类进行处理的方法。这里我先给出思路，同样是针对性的对类的所有Property进行遍历处理，存储输出为你想要的通用格式。<br />
-可供使用的技术包括Category、KVC、runtime等等。<br />
-<br><br><br />
-我开源了自己的通用的序列化和反序列化的Category，供大家研究和学习。 <br />
-<code>能把一个对象转换为NSDictionary，此Dictionary可以被顺利的JSON或其他存储，如NSUserDefaults等。</code> <br />
-<a href="https://github.com/YueRuo/NSObject-YRSerialization">https://github.com/YueRuo/NSObject-YRSerialization</a> <br />
-更具体的使用方法见项目Demo。</p>
-<p>支持：<br />
-复杂的对象模型，不管是继承、嵌套，都可以顺利的遍历完。
-不支持：<br />
-链式存储的对象。如A类中有一个Property也是A类。不支持C结构体。
-另外对NSValue、NSString、NSSet、NSArray、NSDictionary对象不支持直接转换。这些类也不需要此操作。</p>
+                <h3>支付宝电话面试总结</h3>
+<p>2月中的时候，去某招聘网站开放了简历，被一个猎头推了一下阿里的iOS开发职位。<br />
+最近项目特紧，昨夜加班到很晚，回去又改一个小控件到夜里，今天中午做了个PPT没有午休，想不到今天会在这种状态下接到了电话面试。面试我的人还是很友好的。<br />
+总结回忆一下电话面试时犯下的错误吧。<br />
+<br>---若转载请注明出处- YueRuo's Blog - <a href="http://yueruo.github.io">http://yueruo.github.io</a> ---<br></p>
+<p>1.首先是简单的自我介绍，最近一直面试别人的我，在突然接到电话的前几分钟里居然有点晕晕乎乎，迷迷糊糊的把项目情况大概讲了一下，都忘记了稍微点出一些项目使用的技术留给对面发挥。<br />
+2.由于有过一个很早的即时通信的项目，面试官问了一下聊天界面的简单实现，我把当初刚入行时的UILabel+UIImageView的初级做法说完了，居然忘记把现在使用的CoreText技术话题引出来。我提到了表情处理，使用的是我们自己定义的表情标签。<br />
+3.面试官问到个人所掌握的语言，除了OC以外，我回答Java稍微熟悉一点、html、python等有简单了解。面试官思考了一下，觉得还是面试我OC相关的内容，问起我OC和其他语言的优缺点比较(这种经常会碰到的题目本来是很简单的，当时晕晕乎乎的我却答的乱七八糟)，我答了面向对象，提到运行时是对方很感兴趣，追问了运行时能做一些什么，我答了动态创建类，以及方法的拦截处理。对方又追问了OC是如何实现runtime的，我完全忘记了平时看的资料。<br />
+4.换了个话题，聊起多线程，很自然的NSThread，NSOperationQueue和GCD我都提了一下，然后是项目中多线程的应用，我提到了大量离线数据解析卡主线程，最后使用GCD解决，面试官追问GCD的底层实现是什么，对这个问题当时的我完全没反应过来是要聊什么，现在回想起来也许面试官是想引出Block话题。<br />
+5.最后聊到内存管理，我提到iOS中没有垃圾回收，OC的内存管理是依赖于引用技术，然后把ARC技术简单讲了一下，面试官紧跟着追问ARC的底层细节。我回答编译器添加retain、release、copy等代码，面试官接着追问具体在哪里怎么添加的，我此时已近有点混乱了，于是把Set方法的ARC编译器实现讲了一下。这时面试官可能没有听到想要的答案，于是直接追问strong和weak关键字的作用，我回答的是提到了防止循环引用，面试官追问具体是如何防止循环引用的，我回答的时候已近完全错乱了，胡乱的说了一下。<br />
+6.面试官最后觉得答的不是很好，于是便说“看来你没有研究过这些东西的底层实现“，虽然平时我也有看一些偏底层的资料，但是确实没有用心去记，最后我提了引用计数是系统的一块栈记录着各个对象的引用计数，并且是同步的。
+面试官最后礼貌的结束了电话面试，电话的结尾我对自己今天的很差的状态表示了歉意，对方还安慰了我一下，并提到会有评估，如果有结果后续。</p>
+<p>今天整体的电话面试很让自己不满，全程都非常的被动，没有把面试引导到自己擅长的地方。
+同时也发现阿里的面试更加贴近底层，任何一种技术，不光要学会如何去使用，更多的是要去研究它的底层实现，我平时只是一带而过简单的看，所以在这次面试中感到了很大压力。  </p>
+<p>最后，总结一下：毫无准备的面试是危险的，状态不佳的时候应当约一个时间，面试过程中的问题有一些是可以引导到自己擅长的区域的，才能展现自己所拥有的技术，但是最重要的是，要有真材实料实实在在的水平。<br />
+人与公司也是讲究缘分的，恰巧在你需要一份工作的时候有一家公司在招人，而你们恰巧又相互符合对彼此的需要。总之，不论在任何公司，都是缘分，都应当全心全意，努力上进。<br />
+希望后续的自己能更好的学习，踏踏实实的潜心研究下去。</p>
             </div>
             <!-- /.entry-content -->
     <hr />
@@ -152,8 +133,8 @@
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'yueruosblog'; // required: replace example with your forum shortname
-            var disqus_identifier = 'YRSerializationCategory';
-            var disqus_url = 'http://yueruo.github.io/YRSerializationCategory.html';
+            var disqus_identifier = 'iOS-NSNotification';
+            var disqus_url = 'http://yueruo.github.io/iOS-NSNotification.html';
 
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function () {
