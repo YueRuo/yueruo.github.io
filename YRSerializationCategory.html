@@ -133,16 +133,25 @@
 <h6>第三种：使用通用的序列化和反序列化方法。</h6>
 <p>所谓通用方法，即一套可以对任意类进行处理的方法。这里我先给出思路，同样是针对性的对类的所有Property进行遍历处理，存储输出为你想要的通用格式。<br />
 可供使用的技术包括Category、KVC、runtime等等。<br />
-<br><br><br />
+<br>
 我开源了自己的通用的序列化和反序列化的Category，供大家研究和学习。 <br />
-<code>能把一个对象转换为NSDictionary，此Dictionary可以被顺利的JSON或其他存储，如NSUserDefaults等。</code> <br />
+<code>能把一个对象转换为NSDictionary，此Dictionary可以被顺利的JSON或其他存储，如NSUserDefaults等。并能转换回对象</code> <br />
 <a href="https://github.com/YueRuo/NSObject-YRSerialization">https://github.com/YueRuo/NSObject-YRSerialization</a> <br />
-更具体的使用方法见项目Demo。</p>
-<p>支持：<br />
-复杂的对象模型，不管是继承、嵌套，都可以顺利的遍历完。
-不支持：<br />
-链式存储的对象。如A类中有一个Property也是A类。不支持C结构体。
-另外对NSValue、NSString、NSSet、NSArray、NSDictionary对象不支持直接转换。这些类也不需要此操作。</p>
+更具体的使用方法见项目Demo。<br />
+<br></p>
+<p>支持</p>
+<ul>
+<li>复杂的对象模型，不管是继承、嵌套，都可以顺利的遍历完。  </li>
+<li>实现了NSCoding协议</li>
+<li>支持泛型类属性，比如id类型的property。</li>
+<li>检查是否存在自定义的C结构体，确保安全通过存储  </li>
+<li>可以自定义存储的键值，通常对传参或服务器返回数据解析回对象很有帮助</li>
+</ul>
+<p>不支持：  </p>
+<ul>
+<li>链式存储的对象。如A类中有一个Property也是A类。</li>
+<li>不支持自定义的C结构体。</li>
+</ul>
             </div>
             <!-- /.entry-content -->
     <hr />

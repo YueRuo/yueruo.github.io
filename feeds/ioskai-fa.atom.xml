@@ -90,13 +90,22 @@
 &lt;h6&gt;第三种：使用通用的序列化和反序列化方法。&lt;/h6&gt;
 &lt;p&gt;所谓通用方法，即一套可以对任意类进行处理的方法。这里我先给出思路，同样是针对性的对类的所有Property进行遍历处理，存储输出为你想要的通用格式。&lt;br /&gt;
 可供使用的技术包括Category、KVC、runtime等等。&lt;br /&gt;
-&lt;br&gt;&lt;br&gt;&lt;br /&gt;
+&lt;br&gt;
 我开源了自己的通用的序列化和反序列化的Category，供大家研究和学习。 &lt;br /&gt;
-&lt;code&gt;能把一个对象转换为NSDictionary，此Dictionary可以被顺利的JSON或其他存储，如NSUserDefaults等。&lt;/code&gt; &lt;br /&gt;
+&lt;code&gt;能把一个对象转换为NSDictionary，此Dictionary可以被顺利的JSON或其他存储，如NSUserDefaults等。并能转换回对象&lt;/code&gt; &lt;br /&gt;
 &lt;a href="https://github.com/YueRuo/NSObject-YRSerialization"&gt;https://github.com/YueRuo/NSObject-YRSerialization&lt;/a&gt; &lt;br /&gt;
-更具体的使用方法见项目Demo。&lt;/p&gt;
-&lt;p&gt;支持：&lt;br /&gt;
-复杂的对象模型，不管是继承、嵌套，都可以顺利的遍历完。
-不支持：&lt;br /&gt;
-链式存储的对象。如A类中有一个Property也是A类。不支持C结构体。
-另外对NSValue、NSString、NSSet、NSArray、NSDictionary对象不支持直接转换。这些类也不需要此操作。&lt;/p&gt;</summary><category term="iOS"></category></entry></feed>
+更具体的使用方法见项目Demo。&lt;br /&gt;
+&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;支持&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;复杂的对象模型，不管是继承、嵌套，都可以顺利的遍历完。  &lt;/li&gt;
+&lt;li&gt;实现了NSCoding协议&lt;/li&gt;
+&lt;li&gt;支持泛型类属性，比如id类型的property。&lt;/li&gt;
+&lt;li&gt;检查是否存在自定义的C结构体，确保安全通过存储  &lt;/li&gt;
+&lt;li&gt;可以自定义存储的键值，通常对传参或服务器返回数据解析回对象很有帮助&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不支持：  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;链式存储的对象。如A类中有一个Property也是A类。&lt;/li&gt;
+&lt;li&gt;不支持自定义的C结构体。&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="iOS"></category></entry></feed>
