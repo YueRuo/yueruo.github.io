@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>YueRuo's Blog</title><link href="http://yueruo.github.io/" rel="alternate"></link><link href="http://yueruo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://yueruo.github.io/</id><updated>2014-03-27T22:20:00+01:00</updated><entry><title>浅析HHRouter</title><link href="http://yueruo.github.io/iOS-HHRouter.html" rel="alternate"></link><updated>2014-03-27T22:20:00+01:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2014-03-27:iOS-HHRouter.html</id><summary type="html">&lt;h4&gt;浅析HHRouter&lt;/h4&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>YueRuo's Blog</title><link href="http://yueruo.github.io/" rel="alternate"></link><link href="http://yueruo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://yueruo.github.io/</id><updated>2014-05-19T20:20:00+02:00</updated><entry><title>YRBorderView简介</title><link href="http://yueruo.github.io/iOS-YRUISignal.html" rel="alternate"></link><updated>2014-05-19T20:20:00+02:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2014-05-19:iOS-YRUISignal.html</id><summary type="html">&lt;h3&gt;YRUISignal&lt;/h3&gt;
+&lt;p&gt;==========&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt;  &lt;/p&gt;
+&lt;p&gt;开发中经常遇到类似的情况，viewController上贴了view1，view1上贴了view2，view2上贴了view3...&lt;br /&gt;
+（如下图）&lt;/p&gt;
+&lt;p&gt;viewController&lt;br /&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;-----view1&lt;br /&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;------view2&lt;br /&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;------view3  &lt;/p&gt;
+&lt;p&gt;如果在view3上触发了一个事件，需要在view1，或者viewController中处理，按照一般的处理方式，你需要：&lt;br /&gt;
+1.在view3上做protocol，或者做block回调&lt;br /&gt;
+2.把事件传给上一个界面（对view3来说就是给到view2）&lt;br /&gt;
+3.view2再重复1-2的工作，直到到达相应的界面为止。  &lt;/p&gt;
+&lt;p&gt;如果这个view的层次很深。。。。你恐怕就不愿意这么做了。。。&lt;/p&gt;
+&lt;p&gt;还好我们还有替代方案：用通知处理，view3上发送通知，在viewController中先注册通知，再处理它。恩恩，比上面那种要简单多了，但是我们继续思考，是否一个小小的UI事件都需要使用全局的通知呢？  &lt;/p&gt;
+&lt;p&gt;这里我受Touch事件的链式响应处理以及早期BeeFramework中Signal的启发，做了这个小工具类&lt;a href="https://github.com/YueRuo/YRUISignal"&gt;YRUISignal&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;这个工具类的使用很简单。比如说上面提到的view3中触发事件，viewController中处理，只需要两步：&lt;br /&gt;
+1.在view3中触发事件时：  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt; &lt;span class="n"&gt;sendYRUISignalForKey&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s"&gt;@&amp;quot;事件唯一名称&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2.在viewController中实现handleYRUISignal方法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;BOOL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nf"&gt;handleYRUISignal:&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;YRUISignal&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;signal&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;signal&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="n"&gt;isEqualToString&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s"&gt;@&amp;quot;事件唯一名称&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="c1"&gt;//能处理这个信号&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="c1"&gt;//根据需要中断响应链&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="c1"&gt;//不能处理（继续传递给下一个view）&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;打完收工，是不是非常的简单？  &lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;
+需要注意的是：&lt;br /&gt;
+1.这种方式由于采用的是父view链式查找，因此只有view被add到界面上才有效，换句话说，如果这个view被removeFromSubview，则不能正确的传递信号出去。（不过你可以使用sendYRUISignal方法显式指明接受者，但是这样又有点多此一举了）&lt;br /&gt;
+2.由于使用的是父view查找链，直至ViewController，因此如果两个view不在同一个controller上，也不能把事件传递过去。
+3.这种方式个人觉得比通知简单一些，当然仁者见仁智者见智，目前Bee也是使用通知注册的方法去做的传递，但是接收处理上我们不太一致。&lt;br /&gt;
+&lt;br&gt;        &lt;/p&gt;
+&lt;p&gt;希望这里处理方式和思想能对大家有所帮助或者启发。&lt;/p&gt;</summary><category term="iOS"></category></entry><entry><title>浅析HHRouter</title><link href="http://yueruo.github.io/iOS-HHRouter.html" rel="alternate"></link><updated>2014-03-27T22:20:00+01:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2014-03-27:iOS-HHRouter.html</id><summary type="html">&lt;h4&gt;浅析HHRouter&lt;/h4&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;最近逛论坛，看到一个很小巧的基于url router的iOS小工具&lt;a href="https://github.com/Huohua/HHRouter"&gt;HHRouter&lt;/a&gt;。
 同时附上论坛原帖地址&lt;a href="http://www.cocoachina.com/bbs/read.php?tid=195480"&gt;http://www.cocoachina.com/bbs/read.php?tid=195480&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt;  &lt;/p&gt;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>YueRuo's Blog</title><link href="http://yueruo.github.io/" rel="alternate"></link><link href="http://yueruo.github.io/feeds/ioskai-fa.atom.xml" rel="self"></link><id>http://yueruo.github.io/</id><updated>2014-05-19T20:20:00+02:00</updated><entry><title>YRBorderView简介</title><link href="http://yueruo.github.io/iOS-YRUISignal.html" rel="alternate"></link><updated>2014-05-19T20:20:00+02:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2014-05-19:iOS-YRUISignal.html</id><summary type="html">&lt;h3&gt;YRUISignal&lt;/h3&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>YueRuo's Blog</title><link>http://yueruo.github.io/</link><description></description><atom:link href="http://yueruo.github.io/feeds/yueruo.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 19 May 2014 20:20:00 +0200</lastBuildDate><item><title>YRBorderView简介</title><link>http://yueruo.github.io/iOS-YRUISignal.html</link><description>&lt;h3&gt;YRUISignal&lt;/h3&gt;
 &lt;p&gt;==========&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt;  &lt;/p&gt;
 &lt;p&gt;开发中经常遇到类似的情况，viewController上贴了view1，view1上贴了view2，view2上贴了view3...&lt;br /&gt;
@@ -38,21 +38,37 @@
 2.由于使用的是父view查找链，直至ViewController，因此如果两个view不在同一个controller上，也不能把事件传递过去。
 3.这种方式个人觉得比通知简单一些，当然仁者见仁智者见智，目前Bee也是使用通知注册的方法去做的传递，但是接收处理上我们不太一致。&lt;br /&gt;
 &lt;br&gt;        &lt;/p&gt;
-&lt;p&gt;希望这里处理方式和思想能对大家有所帮助或者启发。&lt;/p&gt;</summary><category term="iOS"></category></entry><entry><title>浅析HHRouter</title><link href="http://yueruo.github.io/iOS-HHRouter.html" rel="alternate"></link><updated>2014-03-27T22:20:00+01:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2014-03-27:iOS-HHRouter.html</id><summary type="html">&lt;h4&gt;浅析HHRouter&lt;/h4&gt;
+&lt;p&gt;希望这里处理方式和思想能对大家有所帮助或者启发。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">YueRuo</dc:creator><pubDate>Mon, 19 May 2014 20:20:00 +0200</pubDate><guid>tag:yueruo.github.io,2014-05-19:iOS-YRUISignal.html</guid><category>iOS</category></item><item><title>浅析HHRouter</title><link>http://yueruo.github.io/iOS-HHRouter.html</link><description>&lt;h4&gt;浅析HHRouter&lt;/h4&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;最近逛论坛，看到一个很小巧的基于url router的iOS小工具&lt;a href="https://github.com/Huohua/HHRouter"&gt;HHRouter&lt;/a&gt;。
 同时附上论坛原帖地址&lt;a href="http://www.cocoachina.com/bbs/read.php?tid=195480"&gt;http://www.cocoachina.com/bbs/read.php?tid=195480&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt;  &lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;前两年研究Three20时就看到过他们这种的应用，但是Three20太过于庞大和重量级，今天看到这个HHRouter却比较小巧。有些想说的东西论坛原帖分析的也很到位了，我就不再重述。&lt;br /&gt;
 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;这种思想还是比较有借鉴性的，高度解耦，同时也很容易追踪跳转路径和历史记录。&lt;br /&gt;
 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;但同时也存在一定的局限性，比如涉及到复杂对象传参，基本上还是需要以前的处理方式去做。当然，这种东西个人感觉还是值得一试的。&lt;br /&gt;
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;其他的就不多说什么了，有兴趣的可以自己去看看其内部实现。&lt;/p&gt;</summary><category term="iOS"></category></entry><entry><title>YRBorderView简介</title><link href="http://yueruo.github.io/iOS-YRBorderView.html" rel="alternate"></link><updated>2014-03-26T20:20:00+01:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2014-03-26:iOS-YRBorderView.html</id><summary type="html">&lt;h4&gt;YRBorderView简介&lt;/h4&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;其他的就不多说什么了，有兴趣的可以自己去看看其内部实现。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">YueRuo</dc:creator><pubDate>Thu, 27 Mar 2014 22:20:00 +0100</pubDate><guid>tag:yueruo.github.io,2014-03-27:iOS-HHRouter.html</guid><category>iOS</category></item><item><title>YRBorderView简介</title><link>http://yueruo.github.io/iOS-YRBorderView.html</link><description>&lt;h4&gt;YRBorderView简介&lt;/h4&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;开发中经常遇到给某个view增加边线和角度，总觉得使用Layer的Border功能不够，比如只给某个边加一条边线等等。最近闲来无事，便做了这个小View。用于各种边线和圆角效果的处理:&lt;a href="https://github.com/YueRuo/YRBorderView"&gt;YRBorderView&lt;/a&gt;。&lt;br /&gt;
 &lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt;&lt;br /&gt;
 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;基于CoreGraphics进行的绘制，相比系统自身的Layer功能更加强大和灵活，layer的border只能是相同颜色相同粗细相同弧度。而YRBorderView边线支持4个方向的边线定制粗细、颜色、是否显示。同时4个角分别支持不同弧度设置。&lt;br /&gt;
 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;另外，支持view裁切掉边线外面的部分（图中view的背景灰色被裁掉了）。 &lt;br /&gt;
 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;详细的效果可以看下图的5个view。其中的灰色是view的背景色，紫色是边线内填充色。&lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;img alt="alt YRBorderViewDemo效果图" src="image/YRBorderViewDemo效果图.png" title="YRBorderViewDemo效果图" /&gt;&lt;br /&gt;
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;其他的就不多说什么了，有兴趣的可以自己去看看其内部实现。或者可以自己去扩展做一个view的category玩一玩。&lt;/p&gt;</summary><category term="iOS"></category></entry><entry><title>iOS中屏蔽父类方法</title><link href="http://yueruo.github.io/iOS-SuperMethodHide.html" rel="alternate"></link><updated>2013-12-22T13:20:00+01:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2013-12-22:iOS-SuperMethodHide.html</id><summary type="html">&lt;h4&gt;iOS中屏蔽父类方法&lt;/h4&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;其他的就不多说什么了，有兴趣的可以自己去看看其内部实现。或者可以自己去扩展做一个view的category玩一玩。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">YueRuo</dc:creator><pubDate>Wed, 26 Mar 2014 20:20:00 +0100</pubDate><guid>tag:yueruo.github.io,2014-03-26:iOS-YRBorderView.html</guid><category>iOS</category></item><item><title>支付宝电话面试</title><link>http://yueruo.github.io/iOS-NSNotification.html</link><description>&lt;h3&gt;支付宝电话面试总结&lt;/h3&gt;
+&lt;p&gt;2月中的时候，去某招聘网站开放了简历，被一个猎头推了一下阿里的iOS开发职位。&lt;br /&gt;
+最近项目特紧，昨夜加班到很晚，回去又改一个小控件到夜里，今天中午做了个PPT没有午休，想不到今天会在这种状态下接到了电话面试。面试我的人还是很友好的。&lt;br /&gt;
+总结回忆一下电话面试时犯下的错误吧。&lt;br /&gt;
+&lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;1.首先是简单的自我介绍，最近一直面试别人的我，在突然接到电话的前几分钟里居然有点晕晕乎乎，迷迷糊糊的把项目情况大概讲了一下，都忘记了稍微点出一些项目使用的技术留给对面发挥。&lt;br /&gt;
+2.由于有过一个很早的即时通信的项目，面试官问了一下聊天界面的简单实现，我把当初刚入行时的UILabel+UIImageView的初级做法说完了，居然忘记把现在使用的CoreText技术话题引出来。我提到了表情处理，使用的是我们自己定义的表情标签。&lt;br /&gt;
+3.面试官问到个人所掌握的语言，除了OC以外，我回答Java稍微熟悉一点、html、python等有简单了解。面试官思考了一下，觉得还是面试我OC相关的内容，问起我OC和其他语言的优缺点比较(这种经常会碰到的题目本来是很简单的，当时晕晕乎乎的我却答的乱七八糟)，我答了面向对象，提到运行时是对方很感兴趣，追问了运行时能做一些什么，我答了动态创建类，以及方法的拦截处理。对方又追问了OC是如何实现runtime的，我完全忘记了平时看的资料。&lt;br /&gt;
+4.换了个话题，聊起多线程，很自然的NSThread，NSOperationQueue和GCD我都提了一下，然后是项目中多线程的应用，我提到了大量离线数据解析卡主线程，最后使用GCD解决，面试官追问GCD的底层实现是什么，对这个问题当时的我完全没反应过来是要聊什么，现在回想起来也许面试官是想引出Block话题。&lt;br /&gt;
+5.最后聊到内存管理，我提到iOS中没有垃圾回收，OC的内存管理是依赖于引用技术，然后把ARC技术简单讲了一下，面试官紧跟着追问ARC的底层细节。我回答编译器添加retain、release、copy等代码，面试官接着追问具体在哪里怎么添加的，我此时已近有点混乱了，于是把Set方法的ARC编译器实现讲了一下。这时面试官可能没有听到想要的答案，于是直接追问strong和weak关键字的作用，我回答的是提到了防止循环引用，面试官追问具体是如何防止循环引用的，我回答的时候已近完全错乱了，胡乱的说了一下。&lt;br /&gt;
+6.面试官最后觉得答的不是很好，于是便说“看来你没有研究过这些东西的底层实现“，虽然平时我也有看一些偏底层的资料，但是确实没有用心去记，最后我提了引用计数是系统的一块栈记录着各个对象的引用计数，并且是同步的。
+面试官最后礼貌的结束了电话面试，电话的结尾我对自己今天的很差的状态表示了歉意，对方还安慰了我一下，并提到会有评估，如果有结果后续。&lt;/p&gt;
+&lt;p&gt;今天整体的电话面试很让自己不满，全程都非常的被动，没有把面试引导到自己擅长的地方。
+同时也发现阿里的面试更加贴近底层，任何一种技术，不光要学会如何去使用，更多的是要去研究它的底层实现，我平时只是一带而过简单的看，所以在这次面试中感到了很大压力。  &lt;/p&gt;
+&lt;p&gt;最后，总结一下：毫无准备的面试是危险的，状态不佳的时候应当约一个时间，面试过程中的问题有一些是可以引导到自己擅长的区域的，才能展现自己所拥有的技术，但是最重要的是，要有真材实料实实在在的水平。&lt;br /&gt;
+人与公司也是讲究缘分的，恰巧在你需要一份工作的时候有一家公司在招人，而你们恰巧又相互符合对彼此的需要。总之，不论在任何公司，都是缘分，都应当全心全意，努力上进。&lt;br /&gt;
+希望后续的自己能更好的学习，踏踏实实的潜心研究下去。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">YueRuo</dc:creator><pubDate>Fri, 28 Feb 2014 20:20:00 +0100</pubDate><guid>tag:yueruo.github.io,2014-02-28:iOS-NSNotification.html</guid><category>iOS面试</category></item><item><title>iOS中屏蔽父类方法</title><link>http://yueruo.github.io/iOS-SuperMethodHide.html</link><description>&lt;h4&gt;iOS中屏蔽父类方法&lt;/h4&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;iOS开发中，有时你可能希望屏蔽一些父类的方法，比如说对于单例类，你不希望别人再通过  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="kt"&gt;Class&lt;/span&gt; &lt;span class="n"&gt;alloc&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -103,7 +119,7 @@
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="c1"&gt;//其他的方法等等&lt;/span&gt;
 &lt;span class="k"&gt;@end&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="iOS"></category></entry><entry><title>iOS的通用的类序列化</title><link href="http://yueruo.github.io/YRSerializationCategory.html" rel="alternate"></link><updated>2013-12-10T11:20:00+01:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2013-12-10:YRSerializationCategory.html</id><summary type="html">&lt;h4&gt;iOS的通用的类序列化&lt;/h4&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">YueRuo</dc:creator><pubDate>Sun, 22 Dec 2013 13:20:00 +0100</pubDate><guid>tag:yueruo.github.io,2013-12-22:iOS-SuperMethodHide.html</guid><category>iOS</category></item><item><title>iOS的通用的类序列化</title><link>http://yueruo.github.io/YRSerializationCategory.html</link><description>&lt;h4&gt;iOS的通用的类序列化&lt;/h4&gt;
 &lt;p&gt;对于任何一门语言来说，序列化和反序列化操作都是很重要的部分。在iOS开发当中，经常可能会遇到把某个类处理成可存储的数据，以便之后使用（或者再恢复成之前的对象）。&lt;br /&gt;
 &lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt; &lt;br /&gt;
 这里我直接进入正题，给出三种解决方案：    &lt;/p&gt;
@@ -147,4 +163,8 @@
 &lt;ul&gt;
 &lt;li&gt;链式存储的对象。如A类中有一个Property也是A类。&lt;/li&gt;
 &lt;li&gt;不支持自定义的C结构体。&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="iOS"></category></entry></feed>
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">YueRuo</dc:creator><pubDate>Tue, 10 Dec 2013 11:20:00 +0100</pubDate><guid>tag:yueruo.github.io,2013-12-10:YRSerializationCategory.html</guid><category>iOS</category></item><item><title>搭建Blog完成</title><link>http://yueruo.github.io/firstblog.html</link><description>&lt;h4&gt;搭建Blog完成&lt;/h4&gt;
+&lt;hr /&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;终于把这个弄好了，不容易啊，以前一直在CSDN上写Blog，但是很难用，后来决定迁移到Github上来，使用Markdown语法来写，于是开始了我的折腾。&lt;br /&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;先是&lt;a href="https://github.com/getpelican/pelican"&gt;Pelican&lt;/a&gt;的安装，然后是Markdown语法的简单学习，接着安装&lt;a href="https://github.com/waylan/Python-Markdown"&gt;Python-Markdown&lt;/a&gt;。最后Github Pages,虽然现在可能还有些东西没完成，但是对于我来说，Blog的基本功能是足够了。  &lt;br /&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;期间遇到了一个Disqus评论不能正常加载的问题，最后通过检查，发现时因为配置文件中的&lt;code&gt;SITEURL&lt;/code&gt;没有设置造成的，添加上后就可以了。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">YueRuo</dc:creator><pubDate>Thu, 05 Dec 2013 20:20:00 +0100</pubDate><guid>tag:yueruo.github.io,2013-12-02:firstblog.html</guid></item></channel></rss>
