@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>YueRuo's Blog</title><link>http://yueruo.github.io/</link><description></description><atom:link href="http://yueruo.github.io/feeds/yueruo.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 19 May 2014 20:20:00 +0200</lastBuildDate><item><title>YRUISignal简介</title><link>http://yueruo.github.io/iOS-YRUISignal.html</link><description>&lt;h3&gt;YRUISignal&lt;/h3&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>YueRuo's Blog</title><link>http://yueruo.github.io/</link><description></description><atom:link href="http://yueruo.github.io/feeds/yueruo.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 05 Jun 2014 21:20:00 +0200</lastBuildDate><item><title>Swift学习笔记(基本语法)</title><link>http://yueruo.github.io/iOS-SwiftSingleton.html</link><description>&lt;h4&gt;Swift实现单例模式&lt;/h4&gt;
+&lt;p&gt;单例模式在各个语言中都有实现，swift语言推出已经几天了，通过这几天的看文档，特奉上写的Swift的单例实现，供大家学习交流，欢迎指正。  &lt;/p&gt;
+&lt;p&gt;&lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;由于Swift语言弱化了struct和class之间的界限，这里我分别给出自己写的两种的单例实现  &lt;/p&gt;
+&lt;h6&gt;class版本：&lt;/h6&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;SwiftSingleton&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="n"&gt;shareInstance&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;SwiftSingleton&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;YRSingleton&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;predicate&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="kt"&gt;dispatch_once_t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+            &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;SwiftSingleton&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nil&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="n"&gt;dispatch_once&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;YRSingleton&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;predicate&lt;/span&gt;&lt;span class="p"&gt;,{&lt;/span&gt;
+                &lt;span class="n"&gt;YRSingleton&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;SwiftSingleton&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;YRSingleton&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;对于单例类，需要一个唯一的对外输出实例的shareInstance方法，而通过官方文档的查阅，发现对于class来说，静态方法可以用&lt;code&gt;class func&lt;/code&gt; 来标示，静态变量使用&lt;code&gt;class var&lt;/code&gt;来处理，但这里我借助了内部struct的静态变量来对唯一的instance进行存储。
+调用时，可以使用  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;swiftInstance1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;SwiftSingleton&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shareInstance&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;swiftInstance2&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;SwiftSingleton&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shareInstance&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;swiftInstance1&lt;/span&gt;&lt;span class="o"&gt;===&lt;/span&gt;&lt;span class="n"&gt;swiftInstance2&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="c1"&gt;//“===”判别是否是同一个实例对象&lt;/span&gt;
+    &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;they are the same instance!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;另外，上面使用到了dispatch_once，有过GCD编程经验的应该会非常熟悉，可以保证线程安全，以及只会被调用一次。&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h6&gt;struct版本&lt;/h6&gt;
+&lt;p&gt;struct版本与class版本几乎一致，唯一区别在于对于func使用的关键字由&lt;code&gt;class func&lt;/code&gt;变为 &lt;code&gt;static func&lt;/code&gt;  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;StructSingleton&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt; &lt;span class="n"&gt;shareInstance&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;StructSingleton&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;YRSingleton&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;predicate&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="kt"&gt;dispatch_once_t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+            &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;StructSingleton&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nil&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="n"&gt;dispatch_once&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;YRSingleton&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;predicate&lt;/span&gt;&lt;span class="p"&gt;,{&lt;/span&gt;
+                &lt;span class="n"&gt;YRSingleton&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;StructSingleton&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;YRSingleton&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">YueRuo</dc:creator><pubDate>Thu, 05 Jun 2014 21:20:00 +0200</pubDate><guid>tag:yueruo.github.io,2014-06-05:iOS-SwiftSingleton.html</guid><category>iOS</category><category>Swift</category></item><item><title>YRUISignal简介</title><link>http://yueruo.github.io/iOS-YRUISignal.html</link><description>&lt;h3&gt;YRUISignal&lt;/h3&gt;
 &lt;p&gt;==========&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt;  &lt;/p&gt;
 &lt;p&gt;开发中经常遇到类似的情况，viewController上贴了view1，view1上贴了view2，view2上贴了view3...&lt;br /&gt;
