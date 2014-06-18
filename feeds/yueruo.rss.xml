@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>YueRuo's Blog</title><link>http://yueruo.github.io/</link><description></description><atom:link href="http://yueruo.github.io/feeds/yueruo.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 05 Jun 2014 21:20:00 +0200</lastBuildDate><item><title>Swift实现单例模式</title><link>http://yueruo.github.io/iOS-SwiftSingleton.html</link><description>&lt;h4&gt;Swift实现单例模式&lt;/h4&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>YueRuo's Blog</title><link>http://yueruo.github.io/</link><description></description><atom:link href="http://yueruo.github.io/feeds/yueruo.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 18 Jun 2014 20:20:00 +0200</lastBuildDate><item><title>YRTransition简介</title><link>http://yueruo.github.io/iOS-YRTransition.html</link><description>&lt;h4&gt;YRTransition简介&lt;/h4&gt;
+&lt;p&gt;先附上GitHub地址 &lt;a href="https://github.com/YueRuo/UINavigationController-YRTransition"&gt;UINavigationController+YRTransition&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在iOS7以前，我们经常使用CATransition完成push和pop的特殊动画
+比如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;CATransition&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;animation&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;CATransition&lt;/span&gt; &lt;span class="n"&gt;animation&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="n"&gt;animation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;duration&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.35&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;animation&lt;/span&gt; &lt;span class="n"&gt;setRemovedOnCompletion&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="n"&gt;animation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timingFunction&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;UIViewAnimationCurveEaseInOut&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;animation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;kCATransitionFade&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;animation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subtype&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;kCATransitionFromLeft&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;view&lt;/span&gt; &lt;span class="n"&gt;layer&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;addAnimation&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;animation&lt;/span&gt; &lt;span class="n"&gt;forKey&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s"&gt;@&amp;quot;animation&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;navigationController&lt;/span&gt; &lt;span class="n"&gt;pushViewController&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;vc&lt;/span&gt; &lt;span class="n"&gt;animated&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;对此我做了这个navigationController的category来简化类似的操作，对于上面这种效果，只需要正常的push调用一句话&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;navigationController&lt;/span&gt; &lt;span class="n"&gt;pushViewController&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;vc&lt;/span&gt; &lt;span class="n"&gt;withYRTransition&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;YRTransition&lt;/span&gt; &lt;span class="n"&gt;transitionWithType&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;YRTransitionType_Fade&lt;/span&gt; &lt;span class="n"&gt;duration&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mf"&gt;0.35&lt;/span&gt;&lt;span class="p"&gt;]];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;当然，记得#import "UINavigationController+YRTransition.h"&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;这个工具一直工作很好，直到iOS7出现后，有部分动画效果变得不一样了，我们发现对于如MoveIn和Reveal这一对动画来说，在动画过程中会添加类似渐变的效果，其中的一个vc的颜色会逐渐的变为navigationController的背景色（参见问题&lt;a href="http://stackoverflow.com/questions/19093688/catransition-for-segue-animation-pre-ios-7-style"&gt;http://stackoverflow.com/questions/19093688/catransition-for-segue-animation-pre-ios-7-style&lt;/a&gt;）  &lt;br /&gt;
+因此我额外手工处理了两个类型CoverIn和CoverReveal（类似presentViewController的效果），来使得我这个category继续工作。  &lt;/p&gt;
+&lt;p&gt;需要注意的是：如果使用这两个手工处理的类型，当使用NavigationBar时，需要关闭VC的iOS7特性&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;edgesForExtendedLayout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;否则会有显示效果偏移的问题。(PS：个人一直不使用原生NavigationBar，因此无这问题)&lt;/p&gt;
+&lt;p&gt;当然，在iOS7下还是推荐使用更新的API去处理转场动画（虽然有点麻烦，但能完成的效果更多），但是目前来看，我的这个category依然还可以用上一阵子，因此开源出来，希望能对大家有所帮助。&lt;br /&gt;
+也欢迎大家给出意见，或是想出更好的办法能保留类似的api来实现iOS7下用新API的转场处理。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">YueRuo</dc:creator><pubDate>Wed, 18 Jun 2014 20:20:00 +0200</pubDate><guid>tag:yueruo.github.io,2014-06-18:iOS-YRTransition.html</guid><category>iOS</category></item><item><title>Swift实现单例模式</title><link>http://yueruo.github.io/iOS-SwiftSingleton.html</link><description>&lt;h4&gt;Swift实现单例模式&lt;/h4&gt;
 &lt;p&gt;单例模式在各个语言中都有实现，swift语言推出已经几天了，通过这几天的看文档，特奉上写的Swift的单例实现，供大家学习交流，欢迎指正。  &lt;/p&gt;
 &lt;p&gt;&lt;br&gt;---若转载请注明出处- YueRuo's Blog - &lt;a href="http://yueruo.github.io"&gt;http://yueruo.github.io&lt;/a&gt; ---&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;由于Swift语言弱化了struct和class之间的界限，这里我分别给出自己写的两种的单例实现  &lt;/p&gt;
