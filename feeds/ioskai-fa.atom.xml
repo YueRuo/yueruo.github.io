@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>YueRuo's Blog</title><link href="http://yueruo.github.io/" rel="alternate"></link><link href="http://yueruo.github.io/feeds/ioskai-fa.atom.xml" rel="self"></link><id>http://yueruo.github.io/</id><updated>2014-06-18T20:20:00+02:00</updated><entry><title>YRTransition简介</title><link href="http://yueruo.github.io/iOS-YRTransition.html" rel="alternate"></link><updated>2014-06-18T20:20:00+02:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2014-06-18:iOS-YRTransition.html</id><summary type="html">&lt;h4&gt;YRTransition简介&lt;/h4&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>YueRuo's Blog</title><link href="http://yueruo.github.io/" rel="alternate"></link><link href="http://yueruo.github.io/feeds/ioskai-fa.atom.xml" rel="self"></link><id>http://yueruo.github.io/</id><updated>2014-12-15T10:20:00+01:00</updated><entry><title>iOS通知中心插件制作-数据传递</title><link href="http://yueruo.github.io/iOS-Widget-Data.html" rel="alternate"></link><updated>2014-12-15T10:20:00+01:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2014-12-14:iOS-Widget-Data.html</id><summary type="html">&lt;h4&gt;通知中心插件 - 数据传递&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;名字解释：&lt;br /&gt;
+Widget：指通知中心的插件&lt;br /&gt;
+Host：指插件的宿主，即通知中心的Today区域&lt;br /&gt;
+Container：指插件所依托存在的应用  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h5&gt;Widget和Host数据共享&lt;/h5&gt;
+&lt;p&gt;主要是利用&lt;NCWidgetProviding&gt;协议下的  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;widgetPerformUpdateWithCompletionHandler&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;NCUpdateResult&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="n"&gt;completionHandler&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;方法进行，根据系统的要求，进行相应的视图更新等处理。  &lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h5&gt;Widget和Container数据共享&lt;/h5&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Widget和Container之间，数据的共享可以通过AppGroup配置后，对共用的存储空间内进行数据共享。  &lt;/p&gt;
+&lt;p&gt;主要步骤有  &lt;/p&gt;
+&lt;p&gt;1.在target中配置AppGroup&lt;br /&gt;
+&lt;center&gt;&lt;img src="image/Widget_AppGroupSet.png" alt="Drawing" width="300px" /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;2.利用NSUserDefault或者NSFileManager访问AppGroup共享区域的内容，如果是NSUserDefault需要用创建方法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="n"&gt;NSUserDefault&lt;/span&gt; &lt;span class="n"&gt;alloc&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;initWithSuiteName&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;groupID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果是NSFileManager需要使用下面的获取路径方法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="n"&gt;NSFileManager&lt;/span&gt; &lt;span class="n"&gt;defaultManager&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;containerURLForSecurityApplicationGroupIdentifier&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;groupID&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h5&gt;Widget和Container的实时数据交互&lt;/h5&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;按照苹果的设计来看，本意是不希望Widget和Container存在直接的实时数据交互的，但是如果我们真的有一些特殊需求，比如：&lt;br /&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;当Container开启时，可以实时改变一些Widget中的内容；又或者在Widget中触发某个按钮之类的操作，希望可以实时影响应用的展示...  &lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;这里我想到一种利用他们之间的AppGroup存储可以共享使用，建立文件监视来变相达到目的的方法。查了一下iOS中目前好像没有相应的FileWatchDog类，因此自己做了一个，丢在github上，&lt;a href="https://github.com/YueRuo/YRFileWatchDog" title="YRFileWatchDog"&gt;链接FileWatchDog&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;共享数据的原理是：Widget和Container都对同一个文件，进行文件变动监视，这样另一方有什么要传递的数据或指令，可以通过写文件的方式来提醒另一方，达到变相的实时数据交互。
+&lt;center&gt;&lt;img src="image/Widget_FileWatch.png" alt="Drawing" width="300px" /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;h5&gt;PS：&lt;/h5&gt;
+&lt;p&gt;网上看到过有人在Widget中利用NSURLSession来进行对Container的下载结束的提醒，这种也在特定条件下可以做一些事情，因此一并列在这里。&lt;/p&gt;</summary><category term="iOS"></category><category term="widget"></category></entry><entry><title>iOS通知中心插件制作</title><link href="http://yueruo.github.io/iOS-Widget.html" rel="alternate"></link><updated>2014-12-14T10:20:00+01:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2014-11-25:iOS-Widget.html</id><summary type="html">&lt;h4&gt;通知中心插件制作&lt;/h4&gt;
+&lt;p&gt;关于通知中心插件的制作:http://www.cocoachina.com/industry/20140627/8960.html这篇文章讲解也很不错。&lt;/p&gt;
+&lt;h5&gt;边界问题&lt;/h5&gt;
+&lt;p&gt;我这里开发时发现一个小问题，插件显示区域比我设置的要大，视图中我的设置为：&lt;br /&gt;
+&lt;center&gt;&lt;img src="image/Widget_Set.png" alt="Drawing" width="300px" /&gt;&lt;/center&gt;&lt;br /&gt;
+但是出来的效果有点差别，左边和底部明显多出一截：&lt;br /&gt;
+&lt;center&gt;&lt;img src="image/Widget_Pre.png" alt="Drawing" width="300px" /&gt;&lt;/center&gt;  &lt;/p&gt;
+&lt;p&gt;通过查看插件控制器默认实现的协议&lt;code&gt;&amp;lt;NCWidgetProviding&amp;gt;&lt;/code&gt;,发现了控制边距的方法，实现并返回Zero  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;UIEdgeInsets&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;widgetMarginInsetsForProposedMarginInsets&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;UIEdgeInsets&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;defaultMarginInsets&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;UIEdgeInsetsZero&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;最后的效果，可以看到距离已经是我们设置的了：
+&lt;center&gt;&lt;img src="image/Widget_OK.png" alt="Drawing" width="300px" /&gt;&lt;/center&gt;&lt;/p&gt;</summary><category term="iOS"></category><category term="widget"></category></entry><entry><title>YRTransition简介</title><link href="http://yueruo.github.io/iOS-YRTransition.html" rel="alternate"></link><updated>2014-06-18T20:20:00+02:00</updated><author><name>YueRuo</name></author><id>tag:yueruo.github.io,2014-06-18:iOS-YRTransition.html</id><summary type="html">&lt;h4&gt;YRTransition简介&lt;/h4&gt;
 &lt;p&gt;先附上GitHub地址 &lt;a href="https://github.com/YueRuo/UINavigationController-YRTransition"&gt;UINavigationController+YRTransition&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在iOS7以前，我们经常使用CATransition完成push和pop的特殊动画
 比如：&lt;/p&gt;
